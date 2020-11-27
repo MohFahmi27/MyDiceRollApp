@@ -4,25 +4,21 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
+import androidx.databinding.DataBindingUtil
+import com.example.mydicerollapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var imageDice: ImageView
-    private lateinit var imageDice2: ImageView
-    private lateinit var btnRoll: Button
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-//      VIEW INFLATE
-        imageDice = findViewById(R.id.imgDice)
-        btnRoll = findViewById(R.id.btnRool)
-        imageDice2 = findViewById(R.id.imgDice2)
+//        THIS WILL CREATE BINDING OBJECT
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
 //      BUTTON  ACTION
-        btnRoll.setOnClickListener {
-            imageDice.setImageResource(getRandomImage())
-            imageDice2.setImageResource(getRandomImage())
+        binding.btnRool.setOnClickListener {
+            binding.imgDice.setImageResource(getRandomImage())
+            binding.imgDice2.setImageResource(getRandomImage())
         }
     }
 
