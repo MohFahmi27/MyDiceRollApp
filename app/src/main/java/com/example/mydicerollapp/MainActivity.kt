@@ -3,31 +3,37 @@ package com.example.mydicerollapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.TextView
+import android.widget.ImageView
 
 class MainActivity : AppCompatActivity() {
-    private var i:Int = 0
+    private lateinit var imageDice: ImageView
+    private lateinit var imageDice2: ImageView
+    private lateinit var btnRoll: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
 //      VIEW INFLATE
-        val txtCount:TextView = findViewById(R.id.txtCount)
-        val txtRoll:TextView = findViewById(R.id.txtRolling)
-        val btnCount:Button = findViewById(R.id.btnCount)
-        val btnRoll:Button = findViewById(R.id.btnRool)
+        imageDice = findViewById(R.id.imgDice)
+        btnRoll = findViewById(R.id.btnRool)
+        imageDice2 = findViewById(R.id.imgDice2)
 
 //      BUTTON  ACTION
         btnRoll.setOnClickListener {
-            txtRoll.text = (1..6).random().toString()
+            imageDice.setImageResource(getRandomImage())
+            imageDice2.setImageResource(getRandomImage())
         }
+    }
 
-        btnCount.setOnClickListener {
-            if (i>6) {
-                i = 0
-                txtCount.text = i.toString()
-            } else txtCount.text = i++.toString()
+    private fun getRandomImage(): Int {
+        return when ((1..6).random()) {
+            1 -> R.drawable.dice_1
+            2 -> R.drawable.dice_2
+            3 -> R.drawable.dice_3
+            4 -> R.drawable.dice_4
+            5 -> R.drawable.dice_5
+            else -> R.drawable.dice_6
         }
     }
 }
